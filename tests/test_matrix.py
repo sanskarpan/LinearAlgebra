@@ -76,8 +76,7 @@ class TestMatrixProperties(unittest.TestCase):
         """Test 3x3 determinant."""
         m = Matrix([[1, 2, 3], [0, 1, 4], [5, 6, 0]])
         det = m.determinant()
-        # Check absolute value (sign may vary with permutation implementation)
-        self.assertAlmostEqual(abs(det), 1.0)
+        self.assertAlmostEqual(det, 1.0)
 
     def test_rank(self):
         """Test rank computation."""
