@@ -375,12 +375,22 @@ class Matrix:
             for i in range(U.rows):
                 det_U *= U.data[i][i]
 
-            # Count permutations to get sign
-            perm_count = sum(1 for i in range(len(P)) if P[i] != i)
-            det_P = (-1) ** perm_count
+            # Count permutation sign using cycle decomposition
+            visited = [False] * len(P)
+            transpositions = 0
+            for i in range(len(P)):
+                if not visited[i]:
+                    cycle_len = 0
+                    j = i
+                    while not visited[j]:
+                        visited[j] = True
+                        j = P[j]
+                        cycle_len += 1
+                    transpositions += cycle_len - 1
+            det_P = (-1) ** transpositions
 
             return det_P * det_U
-        except:
+        except Exception:
             # Fallback to cofactor expansion
             return self._determinant_cofactor()
 
