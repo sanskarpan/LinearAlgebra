@@ -383,6 +383,10 @@ class Tensor:
         Returns:
             Softmax probabilities
         """
+        # Normalize negative axis (e.g. axis=-1 means last axis)
+        if self.ndim > 0 and axis < 0:
+            axis = self.ndim + axis
+
         if self.ndim == 1:
             # 1D softmax
             max_val = max(self.data)
