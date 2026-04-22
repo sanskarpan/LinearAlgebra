@@ -618,13 +618,9 @@ class Matrix:
         Returns:
             Spectral norm (largest singular value)
         """
-        # For small matrices, compute directly via power iteration
-        # This is a placeholder - full implementation in decomposition module
-        if self.rows <= 3 and self.cols <= 3:
-            # Use power iteration for largest eigenvalue of A^T A
-            AtA = self.T.multiply(self)
-            return math.sqrt(self._power_iteration(AtA))
-        return self.frobenius_norm()  # Approximation for now
+        # Use power iteration for largest eigenvalue of A^T A
+        AtA = self.T.multiply(self)
+        return math.sqrt(self._power_iteration(AtA))
 
     def _power_iteration(self, matrix: 'Matrix', num_iterations: int = 100) -> float:
         """Power iteration to find largest eigenvalue."""
